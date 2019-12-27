@@ -1,0 +1,37 @@
+body {
+  background: url("logo-bg.png") #fafafa no-repeat;
+  background-position: left bottom;
+  min-height: 100vh;
+  padding: 2em;
+}
+body .todo-list {
+}
+body .todo-list .header,
+body .todo-list .item {
+  padding: 1em;
+}
+body .todo-list .header {
+  font-size: 1.5em;
+}
+body .todo-list .item {
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  display: flex;
+}
+body .todo-list .item:hover {
+  background-color: #f3f3f3;
+}
+body .todo-list .item > label {
+  text-decoration: line-through;
+  width: 100%;
+}
+body .todo-list .item.completed > label {
+  text-decoration: line-through;
+}
+.task-input {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/*# sourceMappingURL=style.css.map */
