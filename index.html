@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>NodeJS - Speedrun</title>
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -26,32 +26,69 @@
     <div class="container">
       <div class="row task-input">
         <div class="input-field inline col s12">
-          <input id="text" type="text" class="validate" />
-          <label for="text">Enter a new task here</label>
+          <input id="todo-input" type="text" class="validate" />
+          <label for="todo-input">Enter a new task here</label>
         </div>
 
-        <a class="btn-floating btn-large waves-effect waves-light red col "
+        <a
+          class="btn-floating btn-large waves-effect waves-light red col "
+          id="submit-todo"
           ><i class="material-icons">add</i></a
         >
       </div>
-      <div class="todo-list " materialize>
-        <div class="item completed card hoverable">
+      <ul class="todo-list " materialize>
+        <li class="item completed card hoverable" id="123">
           <label>
             <input type="checkbox" />
             <span>Learn React</span>
           </label>
           <i class="material-icons">delete</i>
-        </div>
-        <div class="item card hoverable">
+        </li>
+        <li class="item card hoverable" id="456">
           <label>
             <input type="checkbox" />
             <span>Learn React</span>
           </label>
           <i class="material-icons">delete</i>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
 
     <div></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#submit-todo").on("click", function() {
+          var item = $("#todo-input");
+          var todo = { item: item.val(), id: Date.now() };
+
+          $.ajax({
+            type: "POST",
+            url: "/todo",
+            data: todo,
+            success: function(data) {
+              //do something with the data via front-end framework
+              location.reload();
+            }
+          });
+
+          return false;
+        });
+
+        $("li i").on("click", function() {
+          id = $(this)
+            .parent()
+            .attr("id");
+          $.ajax({
+            type: "DELETE",
+            url: "/todo/" + id,
+            success: function(data) {
+              //do something with the data via front-end framework
+              location.reload();
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
